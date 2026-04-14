@@ -12,7 +12,7 @@ function App() {
   const [editDescription, setEditDescription] = useState('');
 
   function fetchTodos() {
-    fetch('http://localhost:3000/todo')
+    fetch('http://localhost:5000/todo')
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch(() => setError('Failed to load todos'));
@@ -21,7 +21,7 @@ function App() {
   const handleSubmit = () => {
     setError('');
     if (title.trim() && description.trim()) {
-      fetch('http://localhost:3000/todo', {
+      fetch('http://localhost:5000/todo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, description }),
@@ -47,7 +47,7 @@ function App() {
   const handleUpdate = () => {
     setError('');
     if (editTitle.trim() && editDescription.trim()) {
-      fetch(`http://localhost:3000/todo/${editId}`, {
+      fetch(`http://localhost:5000/todo/${editId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: editTitle, description: editDescription }),
@@ -72,7 +72,7 @@ function App() {
   };
 
   const delete_item = (id) => {
-    fetch(`http://localhost:3000/todo/${id}`, { method: 'DELETE' })
+    fetch(`http://localhost:5000/todo/${id}`, { method: 'DELETE' })
       .then(async (res) => {
         if (res.ok) {
           fetchTodos();
@@ -174,7 +174,7 @@ function App() {
                 ) : (
                   <>
                     <button className="btn btn-success" onClick={() => handleEdit(item)}>
-                      Edit
+                       Edit and Save
                     </button>
                     <button className="btn btn-danger" onClick={() => delete_item(item._id)}>
                       Delete
